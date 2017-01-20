@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CriticalTime.iml" filepath="$PROJECT_DIR$/CriticalTime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EighthGradeVersion/EighthGradeVersion.iml" filepath="$PROJECT_DIR$/EighthGradeVersion/EighthGradeVersion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GuaduationVersion/GuaduationVersion.iml" filepath="$PROJECT_DIR$/GuaduationVersion/GuaduationVersion.iml" />
+    </modules>
+  </component>
+</project>
