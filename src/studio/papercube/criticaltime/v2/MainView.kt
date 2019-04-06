@@ -12,7 +12,9 @@ import resources.Resource
 import tornadofx.*
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.temporal.ChronoUnit
+import kotlin.math.absoluteValue
 
 data class SpellOfTime(
         val days: Long,
@@ -43,22 +45,31 @@ class MainView : View() {
     init {
         setStageIcon(Image(Resource.getResourceAsStream("icon.png")))
         startCounter()
+        refreshTime()
+    }
+
+    private fun refreshTime() {
+        val now = LocalDateTime.now()
+        val targetDate = LocalDate.of(now.year, 6, 7)
+
+        val secs = ChronoUnit.SECONDS.between(now, LocalDateTime.of(targetDate, LocalTime.of(9, 0, 0)))
+        val secsAbsolute = secs.absoluteValue
+        val (d, h, m, s) = SpellOfTime.ofSeconds(secsAbsolute)
+        textPreciseDay.text = (if (secs < 0) -d else d).toString()
+        textPreciseHour.text = h.toString()
+        textPreciseMinute.text = m.toString()
+        textPreciseSecond.text = s.toString()
+        textRemainingDays.text = DateUtil.durationBetweenNowAndCertainTimeWithUnit(
+                ChronoUnit.DAYS,
+                targetDate
+        ).toString()
     }
 
     private fun startCounter() {
         timeline {
             keyframe(1.seconds) {
                 setOnFinished {
-                    val now = LocalDateTime.now()
-                    val secs = ChronoUnit.SECONDS.between(now, LocalDateTime.of(now.year, 6, 7, 9, 0, 0))
-                    val (d, h, m, s) = SpellOfTime.ofSeconds(secs)
-                    textPreciseDay.text = d.toString()
-                    textPreciseHour.text = h.toString()
-                    textPreciseMinute.text = m.toString()
-                    textPreciseSecond.text = s.toString()
-                    textRemainingDays.text = DateUtil.durationBetweenNowAndCertainTimeWithUnit(
-                            ChronoUnit.DAYS,
-                            LocalDate.of(now.year, 6, 7)).toString()
+                    refreshTime()
                 }
             }
             cycleCount = Timeline.INDEFINITE
