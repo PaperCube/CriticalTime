@@ -79,8 +79,8 @@ class MainView : View() {
     private val rootPane = stackpane {
         applyBackgroundStyles()
         borderpane {
-            val sizeLarge = 150.0
-            val sizeSmall = 60.0
+            val sizeLarge = 320.0
+            val sizeSmall = 128.0
             vgrow = Priority.NEVER
             hgrow = Priority.ALWAYS
             center = gridpane{
@@ -99,7 +99,7 @@ class MainView : View() {
 
                 row {
                     hbox outer@{
-                        padding = Insets(15.0)
+                        padding = Insets(40.0)
                         alignment = Pos.BASELINE_CENTER
                         arrayOf(
                                 textPreciseDay to Text("d "),
